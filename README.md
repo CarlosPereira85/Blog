@@ -47,6 +47,6 @@ Use these credentials to log in as an admin and manage the website.
 - Make sure you have PHP and MySQL installed and configured.
 - Ensure that the `PDOConnection.inc.php` file is set up with your database details.
 
-If you need help or encounter any issues, please check the documentation or contact support.
-
+If you need help or encounter any issues, please check the documentation 
 Happy blogging!
+
