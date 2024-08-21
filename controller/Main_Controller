@@ -1,0 +1,23 @@
+// In your main script
+
+<?php
+require_once 'includes/PDOConnection.inc.php';
+require_once 'models/BlogPost.php';
+require_once 'models/Message.php';
+require_once 'models/Comment.php';
+require_once 'models/User.php';
+
+// Assume session is started and $currentUserId is set
+$db = (new Database())->getConnection();
+
+$blogPostModel = new BlogPost($db, $currentUserId);
+$messageModel = new Message($db, $currentUserId);
+$commentModel = new Comment($db, $currentUserId);
+$userModel = new User($db);
+
+// Example usage
+$allPosts = $blogPostModel->getAllPosts(true);
+$messages = $messageModel->getMessages($selectedUserId);
+$comments = $commentModel->getComments($postId);
+$userInfo = $userModel->getUserById($currentUserId);
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul li {
+            background: #e2e2e2;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        code {
+            background: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #e8e8e8;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Blog Website Documentation</h1>
+
+    <h2>1. Project Overview</h2>
+    <p><strong>Project Name:</strong> Carlos_Blog</p>
+    <p><strong>Description:</strong> This website is a blogging platform where users can create, edit, view, and delete blog posts. The site also allows users to comment on posts, rate them, and send messages to each other. There is an approval mechanism for posts, and admins can approve or reject user-submitted posts.</p>
+    <p><strong>Technologies Used:</strong> PHP, MySQL, HTML, CSS, JavaScript</p>
+
+    <h2>2. Database Structure</h2>
+    <p>The following tables are assumed based on the provided PHP code:</p>
+    <h3>Users</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>username (VARCHAR)</li>
+        <li>email (VARCHAR)</li>
+        <li>password (VARCHAR)</li>
+        <li>is_admin (TINYINT)</li>
+        <li>profile_image (VARCHAR)</li>
+    </ul>
+
+    <h3>BlogPosts</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>title (VARCHAR)</li>
+        <li>content (TEXT)</li>
+        <li>creation_date (TIMESTAMP)</li>
+        <li>category (VARCHAR)</li>
+        <li>status (ENUM: 'pending', 'approved', 'rejected')</li>
+        <li>user_id (INT, FK -> Users.id)</li>
+        <li>views_count (INT)</li>
+    </ul>
+
+    <h3>Comments</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>post_id (INT, FK -> BlogPosts.id)</li>
+        <li>user_id (INT, FK -> Users.id)</li>
+        <li>comment (TEXT)</li>
+        <li>creation_date (TIMESTAMP)</li>
+    </ul>
+
+    <h3>Ratings</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>post_id (INT, FK -> BlogPosts.id)</li>
+        <li>user_id (INT, FK -> Users.id)</li>
+        <li>rating (INT)</li>
+    </ul>
+
+    <h3>Messages</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>sender_id (INT, FK -> Users.id)</li>
+        <li>receiver_id (INT, FK -> Users.id)</li>
+        <li>message (TEXT)</li>
+        <li>creation_date (TIMESTAMP)</li>
+        <li>read_status (TINYINT)</li>
+    </ul>
+
+    <h3>Posts</h3>
+    <ul>
+        <li>id (INT, PK)</li>
+        <li>user_id (INT, FK -> Users.id)</li>
+        <li>content (TEXT)</li>
+        <li>image (VARCHAR)</li>
+        <li>creation_date (TIMESTAMP)</li>
+    </ul>
+
+    <h2>3. Class Diagram</h2>
+    <p>The classes and their relationships can be represented as a UML class diagram. (Already provided in both Mermaid and PlantUML formats in the previous steps.)</p>
+
+    <h2>4. Use Case Diagrams</h2>
+
+    <h3>4.1. User Management Use Cases</h3>
+    <p><strong>Actors:</strong> User, Admin</p>
+    <p><strong>Use Cases:</strong> These are the actions related to user management:</p>
+    <ul>
+        <li><strong>Register:</strong> Users can create new accounts.</li>
+        <li><strong>Login:</strong> Users can authenticate to access their accounts.</li>
+        <li><strong>Logout:</strong> Users can log out of their accounts.</li>
+        <li><strong>View Profile:</strong> Users can view their own profile and other users' profiles.</li>
+        <li><strong>Edit Profile:</strong> Users can update their personal information.</li>
+    </ul>
+
+    <h3>4.2. Blog Management Use Cases</h3>
+    <p><strong>Actors:</strong> User, Admin</p>
+    <p><strong>Use Cases:</strong> These are the actions related to managing blog content:</p>
+    <ul>
+        <li><strong>Create Post:</strong> Users can create new blog posts.</li>
+        <li><strong>Edit Post:</strong> Users can modify their existing posts.</li>
+        <li><strong>Delete Post:</strong> Users can remove their posts.</li>
+        <li><strong>View Post:</strong> Users can read blog posts.</li>
+        <li><strong>Comment on Post:</strong> Users can leave comments on posts.</li>
+        <li><strong>Rate Post:</strong> Users can provide ratings for posts.</li>
+        <li><strong>Approve/Reject Post (Admin):</strong> Admins can approve or reject posts submitted by users.</li>
+    </ul>
+
+    <h3>4.3. Messaging Use Cases</h3>
+    <p><strong>Actors:</strong> User</p>
+    <p><strong>Use Cases:</strong> These are the actions related to messaging between users:</p>
+    <ul>
+        <li><strong>Send Message:</strong> Users can send messages to other users.</li>
+        <li><strong>View Message:</strong> Users can view their received messages.</li>
+        <li><strong>Delete Message:</strong> Users can delete messages from their inbox.</li>
+        <li><strong>Mark Message as Read:</strong> Users can mark messages as read to distinguish them from unread ones.</li>
+    </ul>
+
+    <h2>5. Sequence Diagrams</h2>
+
+    <h3>5.1. User Registration</h3>
+    <p>This sequence diagram outlines the process of user registration:</p>
+    <ul>
+        <li>The user submits a registration form with their details.</li>
+        <li>The system hashes the user's password for security.</li>
+        <li>The system stores the user's information in the database.</li>
+        <li>The system sends a confirmation message to the user.</li>
+    </ul>
+
+    <h3>5.2. Creating a Blog Post</h3>
+    <p>This sequence diagram details the steps involved in creating a blog post:</p>
+    <ul>
+        <li>The user clicks on the "Create Post" button.</li>
+        <li>The system displays a form for creating a new post.</li>
+        <li>The user fills out the form and submits it.</li>
+        <li>The system saves the post with a status of 'pending' for approval.</li>
+        <li>An admin reviews the post and either approves or rejects it.</li>
+    </ul>
+
+    <h2>6. Detailed Component Descriptions</h2>
+
+    <h3>6.1. User Class</h3>
+    <p><strong>Purpose:</strong> The User class manages all functionalities related to user accounts. This includes user registration, authentication, and profile management. It ensures that users can create accounts, log in, and update their personal information securely.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>register(username: string, email: string, password: string, isAdmin: int = 0): boolean</code>: Registers a new user. The <code>isAdmin</code> parameter determines if the user has admin privileges.</li>
+        <li><code>authenticate(login: string, password: string): array|false</code>: Authenticates a user based on their login credentials. Returns user data if successful, or <code>false</code> if authentication fails.</li>
+    </ul>
+
+    <h3>6.2. BlogPost Class</h3>
+    <p><strong>Purpose:</strong> The BlogPost class handles all operations related to blog posts, such as creation, editing, deletion, and viewing. It also manages post approval for admin review.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>getAllPosts(status: string = null): array</code>: Retrieves all posts, with optional filtering by approval status.</li>
+        <li><code>getPost(id: int): array</code>: Retrieves a single post by its ID.</li>
+        <li><code>addPost(title: string, content: string, category: string): boolean</code>: Adds a new blog post. The status is initially set to 'pending.'</li>
+        <li><code>updatePost(id: int, title: string, content: string, category: string): boolean</code>: Updates an existing post.</li>
+        <li><code>deletePost(id: int): boolean</code>: Deletes a post, verifying the user's authorization.</li>
+        <li><code>incrementViewCount(id: int): void</code>: Increments the view count for a post.</li>
+        <li><code>approvePost(id: int): boolean</code>: Approves a post (Admin only).</li>
+        <li><code>rejectPost(id: int): boolean</code>: Rejects a post (Admin only).</li>
+    </ul>
+
+    <h3>6.3. Comment Class</h3>
+    <p><strong>Purpose:</strong> The Comment class manages comments made on blog posts, allowing users to add and retrieve comments.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>addComment(postId: int, userId: int, comment: string): boolean</code>: Adds a comment to a specific post.</li>
+        <li><code>getComments(postId: int): array</code>: Retrieves all comments for a given post.</li>
+    </ul>
+
+    <h3>6.4. Message Class</h3>
+    <p><strong>Purpose:</strong> The Message class handles private messaging between users, including sending, retrieving, and managing messages.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>sendMessage(senderId: int, receiverId: int, message: string): boolean</code>: Sends a message from one user to another.</li>
+        <li><code>getMessages(userId: int): array</code>: Retrieves messages exchanged between two users.</li>
+        <li><code>markMessagesAsRead(userId: int): void</code>: Marks all messages as read for the current user.</li>
+        <li><code>getUnreadMessages(userId: int): int</code>: Retrieves the count of unread messages for a user.</li>
+    </ul>
+
+    <h3>6.5. Post Class</h3>
+    <p><strong>Purpose:</strong> The Post class manages user-generated content that is separate from the main blog posts, such as user posts with optional images.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>createPost(userId: int, content: string, image: string = null): boolean</code>: Creates a new user post with optional image.</li>
+        <li><code>getPostsByUser(userId: int): array</code>: Retrieves all posts made by a specific user.</li>
+    </ul>
+
+    <h3>6.6. Rating Class</h3>
+    <p><strong>Purpose:</strong> The Rating class manages ratings for blog posts, allowing users to rate posts and administrators to view the ratings.</p>
+    <p><strong>Methods:</strong></p>
+    <ul>
+        <li><code>addRating(postId: int, userId: int, rating: int): boolean</code>: Adds a rating to a post.</li>
+        <li><code>getRatings(postId: int): array</code>: Retrieves ratings for a specific post.</li>
+        <li><code>userHasRated(postId: int, userId: int): boolean</code>: Checks if a user has already rated a particular post.</li>
+    </ul>
+
+    <h2>7. Admin Dashboard</h2>
+    <p><strong>Purpose:</strong> The Admin Dashboard is a web interface that allows administrators to manage various aspects of the blog website, including post approvals, message management, and user interactions. It is designed to help admins efficiently oversee and control site content and user activities.</p>
+
+    <h3>7.1. Approval and Rejection of Posts</h3>
+    <p><strong>Functionality:</strong> Admins can approve or reject posts submitted by users. This process involves:</p>
+    <ul>
+        <li>Fetching unapproved posts from the database.</li>
+        <li>Providing options to approve or reject each post.</li>
+        <li>Updating the post status based on the admin's action.</li>
+        <li>Redirecting the admin to the dashboard with a status message indicating success or failure.</li>
+    </ul>
+
+    <h3>7.2. Message Management</h3>
+    <p><strong>Functionality:</strong> Admins can manage private messages between users. This includes:</p>
+    <ul>
+        <li>Fetching and displaying messages between the admin and other users.</li>
+        <li>Deleting specific messages as needed.</li>
+        <li>Saving chat histories to text files for record-keeping or analysis.</li>
+        <li>Sending new messages to users through a form.</li>
+    </ul>
+
+    <h3>7.3. Code Overview</h3>
+ 
+
+    <p><strong>Admin Dashboard Interface:</strong> The dashboard includes options for approving/rejecting posts, managing messages, and saving chat logs. The interface is designed to be intuitive and allows admins to easily navigate and perform their tasks.</p>
+</div>
+
+</body>
+</html>
