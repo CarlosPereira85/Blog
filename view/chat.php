@@ -1,5 +1,5 @@
 <?php
-include_once "controller/Chat.php"
+include_once "controller/Chat.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,8 @@ include_once "controller/Chat.php"
     <title>Chat</title>
     <link rel="stylesheet" href="css/chat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
+    <!-- Include the JavaScript file -->
+    <script src="js/chat.js" defer></script>
 </head>
 <body>
     <div class="chat-wrapper">
@@ -62,40 +63,8 @@ include_once "controller/Chat.php"
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to scroll to the bottom of the chat container
-            function scrollToBottom() {
-                const messageContainer = document.getElementById('message-container');
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            }
-
-            // Scroll to the bottom when the page loads
-            scrollToBottom();
-
-            // Scroll to the bottom when a new message is sent or received
-            const observer = new MutationObserver(scrollToBottom);
-            observer.observe(document.getElementById('message-container'), { childList: true });
-
-            // Handle user list click
-            document.getElementById('user-list').addEventListener('click', function(e) {
-                if (e.target.classList.contains('user-item')) {
-                    const userId = e.target.getAttribute('data-user-id');
-                    // Update the URL to include the selected user ID
-                    const newUrl = new URL(window.location.href);
-                    newUrl.searchParams.set('user_id', userId);
-                    window.location.href = newUrl;
-                }
-            });
-
-            // Highlight the selected user
-            const selectedUserId = <?= json_encode($selectedUserId); ?>;
-            const userItems = document.querySelectorAll('.user-item');
-            userItems.forEach(item => {
-                if (item.getAttribute('data-user-id') == selectedUserId) {
-                    item.classList.add('selected');
-                }
-            });
-        });
+        // Embed PHP variable into JavaScript as a global variable
+        window.selectedUserId = <?= json_encode($selectedUserId, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
     </script>
 </body>
 </html>
