@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Process form submission
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $is_visible = isset($_POST['is_visible']) ? 1 : 0;
+    $imageFile = isset($_FILES['image']) ? $_FILES['image'] : null;
 
     try {
-        if ($blogPost->updatePost($postId, $title, $content, $is_visible)) {
+        if ($blogPost->updatePost($postId, $title, $content, $imageFile)) {
             header('Location: index.php?action=home');
             exit();
         }

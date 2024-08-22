@@ -131,14 +131,23 @@ class BlogPost implements iDatenbank {
     }
 
     // Method to update a post
-    public function updatePost($postId, $title, $content) {
-        $query = "UPDATE BlogPosts SET title = :title, content = :content WHERE id = :id";
+    public function updatePost($postId, $title, $content, $imageFile = null) {
+        $query = "UPDATE BlogPosts SET title = :title, content = :content, status = 'pending' WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $postId, PDO::PARAM_INT);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
-        return $stmt->execute();
+        
+        if ($stmt->execute()) {
+            // If an image was uploaded, process it
+            if ($imageFile && $imageFile['name']) {
+                $this->uploadImage($postId, $imageFile);
+            }
+            return true;
+        }
+        return false;
     }
+    
 
     public function deletePost($id) {
         $stmt = $this->db->prepare("SELECT user_id FROM BlogPosts WHERE id = ?");

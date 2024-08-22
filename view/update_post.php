@@ -17,21 +17,25 @@ include_once 'controller/Update.php';
         <h1>Update Post</h1>
     </header>
     <main>
-        <form action="index.php?action=update_post&id=<?php echo urlencode($postId); ?>" method="post">
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title']); ?>" required>
-            </div>
+    <form action="index.php?action=update_post&id=<?php echo urlencode($postId); ?>" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title']); ?>" required>
+    </div>
 
-            <div class="form-group">
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="10" required><?php echo htmlspecialchars($post['content']); ?></textarea>
-            </div>
+    <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="10" required><?php echo htmlspecialchars($post['content']); ?></textarea>
+    </div>
 
-        
+    <div class="form-group">
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image">
+    </div>
 
-            <input type="submit" value="Update Post">
-        </form>
+    <input type="submit" value="Update Post">
+</form>
+
     </main>
     <footer>
         <nav>

@@ -85,7 +85,7 @@ $title = htmlspecialchars($post['title']);
             <?php if ($featuredImage): ?>
                 <!-- Debugging: Check the actual image path -->
                 <?php $imagePath = htmlspecialchars($featuredImage); ?>
-                <img src="<?= $imagePath; ?>" alt="Featured Image" style="max-width: 100%; height: auto;">
+                <img src="<?= $imagePath; ?>" alt="Featured Image" style="max-width: 40%; height: auto;">
             <?php else: ?>
                 <p>No featured image available.</p>
             <?php endif; ?>
