@@ -11,7 +11,9 @@ class BlogPost implements iDatenbank {
         $this->currentUserId = $currentUserId;
     }
 
-    public function getAllPosts($onlyApproved = false) {
+    
+
+    public function getAllPosts($forManagement = false) {
         $query = "
             SELECT BlogPosts.id, BlogPosts.title, BlogPosts.content, BlogPosts.creation_date, 
                    BlogPosts.category, BlogPosts.status, BlogPosts.user_id, Users.username, 
@@ -19,22 +21,27 @@ class BlogPost implements iDatenbank {
             FROM BlogPosts
             JOIN Users ON BlogPosts.user_id = Users.id
         ";
-
-        if ($onlyApproved) {
-            $query .= " WHERE (BlogPosts.status = 'approved' OR BlogPosts.user_id = :currentUserId)";
+    
+        if ($forManagement) {
+            // Fetch all posts created by the current user for management
+            $query .= " WHERE BlogPosts.user_id = :currentUserId";
+        } else {
+            // Fetch only approved posts for the homepage
+            $query .= " WHERE BlogPosts.status = 'approved'";
         }
-
+    
         $query .= " ORDER BY BlogPosts.creation_date DESC";
-
+    
         $stmt = $this->db->prepare($query);
-
-        if ($onlyApproved) {
+    
+        if ($forManagement) {
             $stmt->bindParam(':currentUserId', $this->currentUserId, PDO::PARAM_INT);
         }
-
+    
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public function getPost($id) {
         $stmt = $this->db->prepare("SELECT * FROM BlogPosts WHERE id = ?");

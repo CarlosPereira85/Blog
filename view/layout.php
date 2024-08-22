@@ -106,6 +106,9 @@ if ($currentUserId) {
                 case 'settings':
                     include 'view/settings.php'; // Posts view for logged-in users
                     break;
+                case 'manage_posts':
+                    include 'view/manage_posts.php'; // Posts view for logged-in users
+                    break;
                 case 'category_food':
                     include 'view/category_food.php'; // Posts view for logged-in users
                     break;
