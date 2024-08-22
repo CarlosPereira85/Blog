@@ -30,7 +30,9 @@ if ($currentUserId) {
             display: flex;
             align-items: center;
             margin-left: auto;
+            
         }
+       
         .user-profile img {
             border-radius: 50%;
             width: 40px;
@@ -38,14 +40,14 @@ if ($currentUserId) {
             margin-right: 10px;
         }
         .user-profile span {
-            font-size: 14px;
+            font-size: 30px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>My Blog</h1>
-        <p>Welcome to my blog where I share my thoughts and experiences.</p>
+        
+        
         <?php if ($currentUserId && $userProfile): ?>
             <div class="user-profile">
                 <?php if (!empty($userProfile['profile_image'])): ?>

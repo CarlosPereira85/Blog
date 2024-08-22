@@ -2,13 +2,13 @@
 require_once 'includes/PDOConnection.inc.php';
 require_once 'model/BlogPost.php';
 
-
 $db = (new Database())->getConnection();
 $currentUserId = $_SESSION['user_id'] ?? null;
 $blogPost = new BlogPost($db, $currentUserId);
 
 // Fetch approved posts only
-$posts = $blogPost->getAllPosts(true);  // true means only approved posts
+$posts = $blogPost->getAllPosts(true);
+
 $title = "My Blog";
 ?>
 
@@ -31,6 +31,18 @@ $title = "My Blog";
             top: -10px;
             right: -10px;
         }
+        .rejected-post {
+            color: red;
+            font-style: italic;
+        }
+        .approved-post {
+            color: green;
+            font-style: italic;
+        }
+        .pending-post {
+            color: orange;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -51,6 +63,9 @@ $title = "My Blog";
                 <th>Content</th>
                 <th>Creation Date</th>
                 <th>Category</th>
+                <?php if (isset($_SESSION['user_id'])): // Only show this column if a user is logged in ?>
+                    <th>Status</th>
+                <?php endif; ?>
                 <th>Actions</th>
             </tr>
             <?php foreach ($posts as $post): ?>
@@ -66,6 +81,17 @@ $title = "My Blog";
                     <td class="truncated"><?= htmlspecialchars($post['content']); ?></td>
                     <td><?= htmlspecialchars($post['creation_date']); ?></td>
                     <td><?= htmlspecialchars($post['category']); ?></td>
+                    <?php if ($post['user_id'] == $currentUserId): // Only show status if this is the user's post ?>
+                        <td>
+                            <?php if ($post['status'] == 'rejected'): ?>
+                                <span class="rejected-post">Not Approved</span>
+                            <?php elseif ($post['status'] == 'approved'): ?>
+                                <span class="approved-post">Approved</span>
+                            <?php else: ?>
+                                <span class="pending-post">Pending Approval</span>
+                            <?php endif; ?>
+                        </td>
+                    <?php endif; ?>
                     <td>
                         <?php if (!isset($_SESSION['user_id'])): ?>
                             <a href="index.php?action=login" onclick="return confirm('Please log in to view more details.');">Show</a>
