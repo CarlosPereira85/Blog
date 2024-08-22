@@ -21,6 +21,9 @@ try {
         DROP TABLE IF EXISTS Users;
     ");
 
+   
+
+
     // Create the Users table with an additional column for admin role
     $db->exec("
         CREATE TABLE Users (
@@ -60,6 +63,15 @@ try {
             FOREIGN KEY (user_id) REFERENCES Users(id)
         );
     ");
+    $db->exec("
+    CREATE TABLE IF NOT EXISTS PostImages (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        post_id INT NOT NULL,
+        image_path VARCHAR(255) NOT NULL,
+        is_featured BOOLEAN DEFAULT FALSE,
+        FOREIGN KEY (post_id) REFERENCES BlogPosts(id) ON DELETE CASCADE
+    );
+");
 
     // Create the Comments table
     $db->exec("

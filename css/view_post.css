@@ -1,137 +1,174 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: #f0f2f5;
+    color: #333;
 }
 
-/* Container */
 .container {
-    background-color: #fff;
-    padding: 50px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 100%;
-    margin: 20px;
+    width: 95%;
+    max-width: 1200px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-/* Post Title */
-.container h1 {
-    font-size: 28px;
+/* Typography */
+h1, h2, h3 {
+    color: #333;
     margin-bottom: 20px;
-    color: #007bff;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 40px;
+}
+
+h3 {
+    font-size: 1.75rem;
 }
 
 /* Post Content */
 .post-content {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+    line-height: 1.8;
 }
 
 .post-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-    color: #555;
+    margin-bottom: 20px;
 }
 
 .post-content p:last-child {
     margin-bottom: 0;
 }
 
-.post-content em {
-    display: block;
-    margin-top: 10px;
-    color: #888;
-    font-size: 14px;
+/* Rating Section */
+.rating {
+    margin-bottom: 40px;
+    padding: 30px;
+    border-top: 2px solid #e4e4e4;
+}
+
+.rating h2 {
+    margin-bottom: 20px;
+}
+
+.rating select {
+    padding: 10px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.rating button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.rating button:hover {
+    background-color: #0056b3;
+}
+
+.rating p {
+    margin: 15px 0;
+    font-size: 1rem;
+}
+
+.rating h3 {
+    margin-top: 25px;
+    color: #28a745;
+    font-size: 1.5rem;
 }
 
 /* Comments Section */
 .comments {
-    margin-top: 40px;
-}
-
-.comments h2 {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-top: 2px solid #e4e4e4;
 }
 
 .comment {
-    background-color: #f0f0f0;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 8px solid #007bff;
 }
 
 .comment strong {
-    font-size: 14px;
+    font-size: 1.2rem;
     color: #333;
 }
 
 .comment p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #555;
-    margin: 8px 0;
+    margin: 15px 0;
+    font-size: 1.1rem;
 }
 
 .comment em {
-    font-size: 12px;
-    color: #888;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 /* Comment Form */
-.comment-form {
-    margin-top: 30px;
-}
-
-.comment-form h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #007bff;
-}
-
 .comment-form textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    resize: vertical;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-family: 'Arial', sans-serif;
+    resize: none;
 }
 
 .comment-form button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
     background-color: #007bff;
     color: #fff;
-    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .comment-form button:hover {
-    background-color: #0056b3;
+    background-color: #1d78ce;
 }
 
-/* Back Link */
+/* Back to Home Link */
 .back-link {
     display: inline-block;
     margin-top: 30px;
-    text-decoration: none;
     
-    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
 .back-link:hover {
-    color: whitesmoke;
+    
+    text-decoration: underline;
 }

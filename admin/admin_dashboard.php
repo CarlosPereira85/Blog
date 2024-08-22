@@ -42,11 +42,13 @@ include_once "admin/admin_controller.php"
                     <?php foreach ($posts as $post): ?>
                         <tr>
                             <td><?= htmlspecialchars($post['title']); ?></td>
-                            <td><?= htmlspecialchars(substr($post['content'], 0, 100)); ?>...</td>
+                            <td><?= htmlspecialchars($post['content']); ?></td>
                             <td><?= htmlspecialchars($post['category']); ?></td>
+                            
                             <td>
                                 <a href="index.php?action=admin_dashboard&id=<?= urlencode($post['id']); ?>&post_action=approve">Approve</a>
                                 <a href="index.php?action=admin_dashboard&id=<?= urlencode($post['id']); ?>&post_action=reject">Reject</a>
+                                <a href="index.php?action=view_post&id=<?= urlencode($post['id']); ?>" class="view-post">View</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

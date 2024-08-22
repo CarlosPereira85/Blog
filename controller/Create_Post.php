@@ -16,11 +16,11 @@ $blogPost = new BlogPost($db, $currentUserId);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = sanitizeInput($_POST['title']);
     $content = sanitizeInput($_POST['content']);
-    $category = sanitizeInput($_POST['category']); // Get the selected category
-   
+    $category = sanitizeInput($_POST['category']);
+    $imageFile = $_FILES['image'];
 
     try {
-        $postId = $blogPost->addPost($title, $content, $category); // Pass the category to the function
+        $postId = $blogPost->addPost($title, $content, $category, $imageFile);
         echo "Post added successfully with ID: $postId";
         redirect('index.php?action=home');
     } catch (Exception $e) {
