@@ -6,10 +6,21 @@ class User {
         $this->db = $db;
     }
 
+    // Check if email already exists
+    public function emailExists($email) {
+        $stmt = $this->db->prepare("SELECT id FROM Users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->rowCount() > 0;
+    }
+
     // Register a new user
     public function register($username, $email, $password, $isAdmin = 0) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // Check if the email already exists
+        if ($this->emailExists($email)) {
+            return false; // Email is already in use
+        }
 
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO Users (username, email, password, is_admin) VALUES (?, ?, ?, ?)");
         return $stmt->execute([$username, $email, $hashedPassword, $isAdmin]);
     }

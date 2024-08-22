@@ -19,11 +19,14 @@ include_once 'controller/Register.php';
         <form method="post">
             <fieldset>
                 <legend>Register</legend>
+                <?php if (!empty($errorMessage)): ?>
+                    <p style="color: red;"><?= htmlspecialchars($errorMessage); ?></p>
+                <?php endif; ?>
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <label>
-                    <input type="checkbox" name="is_admin"> Admin
+                    <!-- <input type="checkbox" name="is_admin"> Admin -->
                 </label>
                 <button type="submit">Register</button>
             </fieldset>
