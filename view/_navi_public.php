@@ -82,7 +82,7 @@ if ($userId !== null) {
                 <a href="index.php?action=category_food">Food</a>
             </div>
         </li>
-        <li><a href="index.php?action=about">About</a></li>
+        
 
         <?php if (isset($_SESSION['user_id'])): ?>
             <!-- Show links for logged-in users -->

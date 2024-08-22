@@ -9,7 +9,7 @@ $blogPost = new BlogPost($db, $currentUserId);
 // Fetch approved posts only
 $posts = $blogPost->getAllPosts();
 
-$title = "My Blog";
+$title = "Blog";
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +20,21 @@ $title = "My Blog";
     <title><?= htmlspecialchars($title); ?></title>
    <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
     <div class="container">
         <nav>
             <ul>
-                <li><a href="index.php?action=create_post">Create Post</a></li>
-                <li><a href="index.php?action=manage_posts">Manage Posts</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                    <li><a href="index.php?action=create_post">Create Post</a></li>
+                <?php else: ?>
+                    <li><a href="index.php?action=login"></a></li>
+                <?php endif; ?>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                    <li><a href="index.php?action=manage_posts">Manage Posts</a></li>
+                <?php else: ?>
+                    <li><a href="index.php?action=login"></a></li>
+                <?php endif; ?>
                
             </ul>
         </nav>

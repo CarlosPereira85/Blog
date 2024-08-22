@@ -14,15 +14,13 @@ try {
     // Drop existing tables and views in reverse order of dependencies
     $db->exec("
         DROP VIEW IF EXISTS PostRatings;
+        DROP TABLE IF EXISTS PostImages;
         DROP TABLE IF EXISTS Messages;
         DROP TABLE IF EXISTS Comments;
         DROP TABLE IF EXISTS Ratings;
         DROP TABLE IF EXISTS BlogPosts;
         DROP TABLE IF EXISTS Users;
     ");
-
-   
-
 
     // Create the Users table with an additional column for admin role
     $db->exec("
@@ -59,19 +57,21 @@ try {
             post_id INT NOT NULL,
             user_id INT NOT NULL,
             rating TINYINT CHECK (rating >= 1 AND rating <= 5),
-            FOREIGN KEY (post_id) REFERENCES BlogPosts(id),
-            FOREIGN KEY (user_id) REFERENCES Users(id)
+            FOREIGN KEY (post_id) REFERENCES BlogPosts(id) ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
         );
     ");
+    
+    // Create the PostImages table
     $db->exec("
-    CREATE TABLE IF NOT EXISTS PostImages (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        post_id INT NOT NULL,
-        image_path VARCHAR(255) NOT NULL,
-        is_featured BOOLEAN DEFAULT FALSE,
-        FOREIGN KEY (post_id) REFERENCES BlogPosts(id) ON DELETE CASCADE
-    );
-");
+        CREATE TABLE IF NOT EXISTS PostImages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            post_id INT NOT NULL,
+            image_path VARCHAR(255) NOT NULL,
+            is_featured BOOLEAN DEFAULT FALSE,
+            FOREIGN KEY (post_id) REFERENCES BlogPosts(id) ON DELETE CASCADE
+        );
+    ");
 
     // Create the Comments table
     $db->exec("
@@ -81,8 +81,8 @@ try {
             user_id INT NOT NULL,
             comment TEXT NOT NULL,
             creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (post_id) REFERENCES BlogPosts(id),
-            FOREIGN KEY (user_id) REFERENCES Users(id)
+            FOREIGN KEY (post_id) REFERENCES BlogPosts(id) ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
         );
     ");
 

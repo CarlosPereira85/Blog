@@ -8,9 +8,9 @@ include_once "admin/admin_controller.php"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/chat.css">
+   
     <link rel="stylesheet" href="admin/admin.css">
+    <link rel="stylesheet" href="css/chat.css">
     <style>
 
     </style>
@@ -20,14 +20,14 @@ include_once "admin/admin_controller.php"
         <h1>Admin Dashboard</h1>
 
         <!-- Home Button -->
-        <a href="index.php" class="home-button">Back to Home</a>
-
+        <a href="index.php?action=home" class="back-link">Back to Home</a>
+        
         <?php if ($statusMessage): ?>
             <p class="status-message"><?= htmlspecialchars($statusMessage); ?></p>
-        <?php endif; ?>
-
-        <!-- Blog Post Management -->
-        <h2>Unapproved Posts</h2>
+            <?php endif; ?>
+            
+            <!-- Blog Post Management -->
+            <h2>Unapproved Posts</h2>
         <table>
             <thead>
                 <tr>

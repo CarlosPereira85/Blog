@@ -5,7 +5,7 @@ include_once 'model/BlogPost.php';
 include_once 'model/Message.php';
 
 // Ensure the user is logged in and has admin privileges
-session_start();
+
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
     echo "You do not have admin privileges.";
     exit;

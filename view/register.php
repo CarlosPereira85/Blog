@@ -26,7 +26,7 @@ include_once 'controller/Register.php';
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <label>
-                    <input type="checkbox" name="is_admin"> Admin
+                    <!-- <input type="checkbox" name="is_admin"> Admin -->
                 </label>
                 <button type="submit">Register</button>
             </fieldset>
